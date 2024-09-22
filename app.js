@@ -1,13 +1,18 @@
 const express =  require("express")
+const movies = require("./movies.json")
 
 const app = express()
 
 app.disable('x-powered-by')  //Deshabilitando cabecera de express
 
-app.length('/',(req, res)=>{
+app.get('/',(req, res)=>{
     res.json({
         "message": "Hello World"
     })
+})
+
+app.get('/movies',(req, res)=>{
+    res.json(movies)
 })
 
 const PORT = process.env.PORT || 3000
