@@ -1,0 +1,15 @@
+{
+  "name": "Movies app",
+  "version": "1.0.0",
+  "description": "A simple movie app built with Express",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Mayra Rodriguez",
+  
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
