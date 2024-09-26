@@ -7,7 +7,18 @@ app.use(express.json())  //Middleware para poder recibir json
 
 app.disable('x-powered-by')  //Deshabilitando cabecera de express
 
+const ACCEPTED_ORIGINS =[
+    'http://localhost:5500',
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://movies.com'
+]
+
 app.get('/movies',(req, res)=>{
+    const origin = req.header('origin')
+    if(ACCEPTED_ORIGINS.includes(origin) || !origin){
+        res.header("Access-Control-Allow-Origin",origin)
+    }
     const {genre} = req.query
     if(genre) {
         const filteredMovies = movies.filter(
@@ -40,6 +51,19 @@ app.post('/movies',(req, res)=>{
     res.status(201).json(newMovie)
 })
 
+app.delete('/movies/:id',(req, res)=>{
+    const origin = req.header('origin')
+    if(ACCEPTED_ORIGINS.includes(origin) || !origin){
+        res.header("Access-Control-Allow-Origin",origin)
+    }
+    const {id} = req.params
+    const movieIndex = movies.findIndex(movie => movie.id === id)
+    if(movieIndex === -1) return res.status(404).json({message: "Movie not found"})
+
+    movies.splice(movieIndex,1)
+    return res.json({message: "Movie deleted"})
+})
+
 app.patch('/movies/:id', (req, res) => {
     const result = validatePartialMovie(req.body)
   
@@ -63,7 +87,14 @@ app.patch('/movies/:id', (req, res) => {
   
     return res.json(updateMovie)
   })
-
+app.options('/movies/:id',(req, res)=>{
+    const origin = req.header('origin')
+    if(ACCEPTED_ORIGINS.includes(origin) || !origin){
+        res.header("Access-Control-Allow-Origin",origin)
+        res.header("Access-Control-Allow-Methods","GET, POST, PATCH, DELETE")
+    }
+    res.send(200)
+})
 
 const PORT = process.env.PORT || 3000
 
