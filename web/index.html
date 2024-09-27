@@ -43,9 +43,8 @@
 
                     fetch(`http://localhost:3000/movies/${id}`, {
                         method: 'DELETE'
-                    }).then(res => res.json())
-                    .then(res=>{
-                        if(res.success){
+                    }).then(res =>{
+                        if(res.ok){
                             article.remove()
                         }
                     })
