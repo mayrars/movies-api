@@ -4,12 +4,17 @@
   "description": "A simple movie app built with Express",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "Mayra Rodriguez",
+  "homepage": "https://https://mayrars.github.io/movies-api",
   "dependencies": {
+    "cors": "2.8.5",
     "express": "^4.21.0",
     "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
   }
 }
