@@ -1,10 +1,14 @@
-const express =  require("express")
-const crypto = require("node:crypto")
-const movies = require("./movies.json")
-const cors = require("cors")
-const { validateMovie, validatePartialMovie } = require("./schemas/movies")
+import express, { json } from "express"
+import { randomUUID } from "node:crypto"
+import cors from "cors"
+import { validateMovie, validatePartialMovie } from "./schemas/movies.js"
+
+import fs from 'node:fs'
+
+const movies = JSON.parse(fs.readFileSync('./movies.json'),'utf-8')
+
 const app = express()
-app.use(express.json())  //Middleware para poder recibir json
+app.use(json())  //Middleware para poder recibir json
 app.use(cors({
     origin: (origin, callback) => {
         const ACCEPTED_ORIGINS =[
@@ -50,7 +54,7 @@ app.post('/movies',(req, res)=>{
         return res.status(400).json(JSON.parse(result.error.message))
 
     const newMovie = {
-        id: crypto.randomUUID(),
+        id: randomUUID(),
         ...result.data        
     }
     movies.push(newMovie)

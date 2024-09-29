@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A simple movie app built with Express",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node app.js"
   },
