@@ -2,20 +2,16 @@ import { Router } from "express";
 import { readJSON } from "../utils.js"
 import { randomUUID } from "node:crypto"
 import { validateMovie, validatePartialMovie } from "../schemas/movies.js"
+import { MovieModel } from "../models/movie.js";
 
 
 const movies = readJSON('./movies.json')
 
 export const moviesRouter = Router()
 
-moviesRouter.get('/', (req, res)=>{
+moviesRouter.get('/', async (req, res)=>{
     const {genre} = req.query
-    if(genre) {
-        const filteredMovies = movies.filter(
-            movie => movie.genre.some(g=>g.toLowerCase() === genre.toLowerCase())
-        )
-        res.json(filteredMovies)
-    }
+    const movies = await MovieModel.getAll({genre})
     res.json(movies)
 })
 
