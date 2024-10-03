@@ -24,6 +24,9 @@ Content-Type: application/json
     "genre": ["Crime", "Drama"]
 }
 
+### Borrar una pelicula con DELETE
+DELETE http://localhost:3000/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+
 ### Actualizar una pelicula con PATCH
 
 PATCH http://localhost:3000/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
