@@ -19,7 +19,7 @@ export class MovieController{
         const result = validateMovie(req.body)
         if(!result.success) 
             return res.status(400).json({ error: JSON.parse(result.error.message)})
-        const newMovie = await MovieModel.create({input: req.data})
+        const newMovie = await MovieModel.create({input: result.data})
         res.status(201).json(newMovie)
     }
 
