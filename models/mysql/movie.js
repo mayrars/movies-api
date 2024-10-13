@@ -29,6 +29,11 @@ export class MovieModel{
     }
 
     static async getById({id}) {
+        const [movies] = await connection.query(
+            `SELECT title, year, director, duration, poster, rate, BIN_TO_UUID(id) id 
+            FROM movies WHERE id = UUID_TO_BIN(?);`, 
+            [id])
+        if(movies.length === 0) return null
 
     }
 
