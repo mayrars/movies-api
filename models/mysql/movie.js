@@ -69,10 +69,53 @@ export class MovieModel{
     }
 
     static async delete({id}) {
-        
+        try {
+            await connection.query(`DELETE FROM movies WHERE id = UUID_TO_BIN(?);`, [id])    
+        } catch (error) {
+            throw new Error("Error deleting movie")
+        }
+        return true;
     }
     
     static async update({id, input}) {
-        
+        const { genre : genreInput, title, year, duration, director, rate, poster} = input
+        const fieldsToUpdate = [];
+        const values = [];
+        if (title !== undefined) {
+            fieldsToUpdate.push("title = '?'");
+            values.push(title);
+        }
+        if (year !== undefined) {
+            fieldsToUpdate.push("year = ?");
+            values.push(year);
+        }
+        if (duration !== undefined) {
+            fieldsToUpdate.push("duration = ?");
+            values.push(duration);
+        }
+        if (director !== undefined) {
+            fieldsToUpdate.push("director = '?'");
+            values.push(director);
+        }
+        if (rate !== undefined) {
+            fieldsToUpdate.push("rate = ?");
+            values.push(rate);
+        }
+        if (poster !== undefined) {
+            fieldsToUpdate.push("poster = '?'");
+            values.push(poster);
+        }
+        values.push(id)
+        try{
+            await connection.query(`UPDATE movies SET  ${fieldsToUpdate.join(', ')} WHERE id=UUID_TO_BIN(?)`, values)
+        }catch(e){
+            console.log(e)
+            throw new Error("Error updating movie")
+        }
+        const [movies] = await connection.query(
+            `SELECT title, year, director, duration, poster, rate, BIN_TO_UUID(id) id 
+            FROM movies WHERE id = UUID_TO_BIN(?);`, [id])
+
+        return movies[0]
     }
 }

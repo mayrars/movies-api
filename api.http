@@ -4,7 +4,7 @@ GET http://localhost:3000/movies
 
 ### Recuperando una pelicula por id
 
-GET http://localhost:3000/movies/c8a7d63f-3b04-44d3-9d95-8782fd7dcfaf
+GET http://localhost:3000/movies/93e1926e-86fb-11ef-87f8-58a023aaebc3
 
 ### Recuperando las peliculas por genero con query params
 
@@ -25,13 +25,14 @@ Content-Type: application/json
 }
 
 ### Borrar una pelicula con DELETE
-DELETE http://localhost:3000/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+DELETE http://localhost:3000/movies/c4c035ce-8997-11ef-961a-58a023aaebc3
 
 ### Actualizar una pelicula con PATCH
 
-PATCH http://localhost:3000/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+PATCH http://localhost:3000/movies/93e19e29-86fb-11ef-87f8-58a023aaebc3
 Content-Type: application/json
 
 {
-  "year": 2022
+  "year": 1994,
+  "duration": 154
 }
