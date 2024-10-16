@@ -25,7 +25,7 @@ Content-Type: application/json
 }
 
 ### Borrar una pelicula con DELETE
-DELETE http://localhost:3000/movies/c4c035ce-8997-11ef-961a-58a023aaebc3
+DELETE http://localhost:3000/movies/afe1b85f-8bc1-11ef-94ec-58a023aaebc3
 
 ### Actualizar una pelicula con PATCH
 
